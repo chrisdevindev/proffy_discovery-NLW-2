@@ -20,11 +20,28 @@
     --color-small-info: #C1BCCC;
     font-size: 60%; /* controle das medidas rem */
 }
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
 body{
-    background-color: var(--color-background);
-    font-size: 100%;
+    height: 100vh;
+    background: var(--color-background);
+    display: flex;
+    align-items: center;
+    justify-content: center;    
 }
-h1{
-    font-size: 100%;
+body,
+input,
+button,
+textarea{
+    font: 500 1.6rem Poppins;
+    color: var(--color-text-base);
+}
+
+#container{
+    width: 90vw;
+    max-width: 700px;
 }
