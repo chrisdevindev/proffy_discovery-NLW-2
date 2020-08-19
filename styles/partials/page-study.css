@@ -102,8 +102,8 @@
     content: "";
 
     width: calc(100% - 3.2rem);
-    height: 2px;
-    background: var(--color-primary-light);
+    height: 3px;
+    background: var(--color-secondary);
 
     position: absolute;
     left: 1.6rem;
