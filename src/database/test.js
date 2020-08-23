@@ -29,7 +29,12 @@ Database.then(async (db) => {
         }
     ]
 
-    await createProffy(db, {proffyValue, classValue, classScheduleValues})
+    // criando proffys
+    // await createProffy(db, {proffyValue, classValue, classScheduleValues})
 
-        //consultar dados
+    //consultar dados inseridos
+
+    //todos os proffys
+    const selectedProffys = await db.all("SELECT * FROM proffys")
+    console.log(selectedProffys)
 }) 
