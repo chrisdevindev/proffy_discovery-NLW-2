@@ -5,12 +5,30 @@ const proffys = [
         whatsapp: "8893686330",
         bio: "Lover of technology and programming.I’m currently working as Full Stack developer on @TecNorth and I helping young aspirants in the programming world at @DevInDev.br; I'm be specializing in ReactJs, React-Native and NodeJS.",
         subject: "Programação",
-        cost: '100',
+        cost: '100', 
         weekday: [0, 1, 2, 3, 4, 5, 6],
         time_from: [720],
         time_to:[1220]
 
     }
+]
+const subjects = [
+    "Arte",
+    "Programação",
+    "Geografia",
+    "História",
+    "Matemática",
+    "Português",
+    "Química",
+]
+const weekdays = [
+    "Domingo",
+    "Segunda-feira",
+    "Terça-feira",
+    "Quarta-feira",
+    "Quinta-feira",
+    "Sexta-feira",
+    "Sábado"
 ]
 
 const express = require('express')
@@ -24,11 +42,13 @@ function pageLanding(req, res){
 }
 
 function pageStudy(req, res){
-    return res.render('study.html', {proffys})
+    const filters = req.query
+
+    return res.render('study.html', { proffys, filters, subjects, weekdays })
 }
 
 function pageGiveClasses(req, res){
-    return res.render('give-classes.html')
+    return res.render('give-classes.html', {subjects, weekdays})
 }
 
 
