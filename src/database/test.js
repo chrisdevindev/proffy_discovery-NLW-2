@@ -16,7 +16,7 @@ Database.then((db) => {
         cost: '100', 
     }
 
-    classScheduleValue = [
+    classScheduleValues = [
         {
             weekday: [0, 1, 2, ],
             time_from: [720],
