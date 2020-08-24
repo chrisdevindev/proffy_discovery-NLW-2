@@ -46,27 +46,22 @@ async function pageStudy(req, res){
 }
 
 function pageGiveClasses(req, res){
-    const data = req.query
-    
-    const isNotEmpty = Object.keys(data).length > 0 //transformando data em array e vendo se é maior que 0
-    //se tiver dados(data)
-    if(isNotEmpty){
 
-        data.subject = getSubject(data.subject)
-
-        //adicionar data a lista de proffys 
-        proffys.push(data)
-
-        return res.redirect('/study')
-    }  
-
-
-    //se não, mostrar a página
     return res.render('give-classes.html', {subjects, weekdays})
+}
+
+function saveClasses(req, res){
+    const createProffy = require('./database/createProffy')
+
+    const data = req.body
+
+    return res.redirect('/study')
+    
 }
 
 module.exports = {
     pageLanding,
     pageStudy,
-    pageGiveClasses
+    pageGiveClasses,
+    saveClasses
 }
