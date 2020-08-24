@@ -12,25 +12,25 @@ Database.then(async (db) => {
     }
 
     classValue = {
-        subject: "Programação",
+        subject: 1,
         cost: '100', 
     } 
 
     classScheduleValues = [
         {
-            weekday: [0, 1, 2, ],
+            weekday: [0],
             time_from: [720],
             time_to:[1220]
         },
         { 
-            weekday: [3, 4, 5, 66],
+            weekday: [1],
             time_from: [520],
             time_to:[1220]
         }
     ]
 
     // criando proffys
-    // await createProffy(db, {proffyValue, classValue, classScheduleValues})
+    await createProffy(db, {proffyValue, classValue, classScheduleValues})
 
     //consultar dados inseridos
 
@@ -49,4 +49,16 @@ Database.then(async (db) => {
     `)
 
     console.log(selecteClassesAndProffys)
+
+    //
+
+    const selectClassesSchedules = await db.all(`
+        SELECT class_schedule.*
+        FROM class_schedule
+        WHERE class_schedule.class_id = "1"
+        AND class_schedule.weekday = "0"
+        AND class_schedule.time_from <= "720"
+        AND class_schedule.time_to > "720"
+    `)
+    console.log(selectClassesSchedules)
 }) 
