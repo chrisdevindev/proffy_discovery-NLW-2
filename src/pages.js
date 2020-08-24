@@ -1,12 +1,13 @@
 const Database = require('./database/db')
 
 const { subjects, weekdays, getSubject, convertHoursToMinutes } = require('./utils/format')
+const { query } = require('express')
 
 function pageLanding(req, res){
     return res.render('index.html')
 }
 
-function pageStudy(req, res){
+async function pageStudy(req, res){
     const filters = req.query
 
     if(!filters.subject || !filters.weekday || !filters.time){
@@ -17,13 +18,11 @@ function pageStudy(req, res){
     const timeToMinutes = convertHoursToMinutes(filters.time)
 
 
-    console.log('Não tem campos vazios')
-
     const query = `
         SELECT classes.*, proffys.*
         FROM proffys
         JOIN classes ON (classes.proffy_id = proffys.id)
-        WHERE EXISTS (
+        WHERE EXISTS ( 
             SELECT class_schedule.*
             FROM class_schedule
             WHERE class_schedule.class_id = classes.id
@@ -31,8 +30,18 @@ function pageStudy(req, res){
             AND class_schedule.time_from <= ${timeToMinutes}
             AND class_schedule.time_to > ${timeToMinutes}
         )
+        AND classes.subject = '${filters.subject}'
     `
 
+    // caso haja erro na hora de consulta do banco de dados
+    try{
+        const db = await Database
+        const proffys = await db.all(query)
+
+        return res.render('study.html', { proffys, subjects, filters, weekdays })
+    }catch(error){
+        console.log(error)
+    }
 
 }
 
