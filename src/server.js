@@ -14,7 +14,7 @@ nunjucks.configure('src/views', {
 })
 
 //receber os dados do req.body
-.use(express.urlencoded({ extended: true }))
+server.use(express.urlencoded({ extended: true }))
 
 //configurando arquivos estáticos
 server.use(express.static('public'))
@@ -25,6 +25,6 @@ server.get('/study', pageStudy)
 
 server.get('/give-classes', pageGiveClasses)
 
-server.post('/give-classes', saveClasses)
+server.post('/save-classes', saveClasses)
 
 server.listen(5500)
